@@ -95,6 +95,9 @@ func connect(host, user, passwd string) (net.Conn, error) {
 	if err != nil {
 		return nil, err
 	}
+	
+	c.SetKeepAlive(true)
+	c.SetKeepAlivePeriod(30 * time.Second)
 
 	if proxy != "" {
 		fmt.Fprintf(c, "CONNECT %s HTTP/1.1\r\n", host)
