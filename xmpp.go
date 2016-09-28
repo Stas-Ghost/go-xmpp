@@ -31,6 +31,8 @@ import (
 	"os"
 	"strings"
 	"time"
+
+	"github.com/teh-cmc/goautosocket"
 )
 
 const (
@@ -91,11 +93,11 @@ func connect(host, user, passwd string) (net.Conn, error) {
 			addr = url.Host
 		}
 	}
-	c, err := net.Dial("tcp", addr)
+	c, err := gas.Dial("tcp", addr)
 	if err != nil {
 		return nil, err
 	}
-	
+
 	c.SetKeepAlive(true)
 	c.SetKeepAlivePeriod(30 * time.Second)
 
