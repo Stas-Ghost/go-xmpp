@@ -32,7 +32,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/teh-cmc/goautosocket"
+	"github.com/Stas-Ghost/goautosocket"
 )
 
 const (
@@ -98,8 +98,8 @@ func connect(host, user, passwd string) (net.Conn, error) {
 		return nil, err
 	}
 
-	c.SetKeepAlive(true)
-	c.SetKeepAlivePeriod(30 * time.Second)
+	c.(*gas.TCPClient).SetKeepAlive(true)
+	c.(*gas.TCPClient).SetKeepAlivePeriod(30 * time.Second)
 
 	if proxy != "" {
 		fmt.Fprintf(c, "CONNECT %s HTTP/1.1\r\n", host)
